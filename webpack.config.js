@@ -4,7 +4,7 @@ const { getIfUtils, removeEmpty } = require('webpack-config-utils');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const srcDir = resolve(__dirname, 'src');
-const serverUrl = 'http://127.0.0.1:8000';
+const serverUrl = 'http://localhost:8000';
 
 module.exports = function(env) {
   const { ifProd, ifNotProd } = getIfUtils(env);
