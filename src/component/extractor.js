@@ -1,23 +1,10 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import Welcome from './components/Welcome';
-import publicComps from './components/public';
+import { getComponentFor } from './utils';
 
 const CLASS_NAME = 'id-me';
 const COMPONENT_NAME_ATTR = 'data-component';
 const COMPONENT_PROP_ATTR_PREFIX = 'data-prop-';
 
-function componentExists(name) {
-  return Object.prototype.hasOwnProperty.call(publicComps, name);
-}
-
-function getComponentFor(name) {
-  let Component = null;
-  if (componentExists(name)) {
-    Component = publicComps[name];
-  }
-  return Component;
-}
+const Promise = window.Promise;
 
 function getComponentName(element) {
   let name = null;
@@ -52,7 +39,7 @@ function extractComponents() {
       components.push({ element, component, props: extractComponentProps(element) });
     }
   }
-  return components;
+  return Promise.resolve(components);
 }
 
 export default extractComponents;

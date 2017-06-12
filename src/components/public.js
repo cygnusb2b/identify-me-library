@@ -1,3 +1,3 @@
-import Newsletter from './Newsletter';
+import EmailSignupCampaign from './EmailSignupCampaign';
 
-export default { Newsletter };
+export default { EmailSignupCampaign };

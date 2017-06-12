@@ -42,6 +42,10 @@ module.exports = function(env) {
           target: serverUrl,
           secure: false,
         },
+        '/component': {
+          target: serverUrl,
+          secure: false,
+        },
       },
     },
     module: {
