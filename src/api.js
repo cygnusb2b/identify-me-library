@@ -26,6 +26,14 @@ function parseJsonResponse(response) {
   return response.json();
 }
 
+export function submitComponentAnalytics(type, identifier, action, data) {
+  return fetch('/component/analytics', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ data: { type, identifier, action, data } }),
+  }).then(checkResponseStatus).then(parseJsonResponse);
+}
+
 export function retrieveComponentManifest() {
   return fetch('/component/manifest', {
     method: 'POST',
@@ -36,8 +44,8 @@ export function retrieveComponentManifest() {
   }).then(checkResponseStatus).then(parseJsonResponse);
 }
 
-export function submitEmailCampaign(data) {
-  return fetch('/newsletter', {
+export function submitComponentForm(data) {
+  return fetch('/component/submit', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ data }),
