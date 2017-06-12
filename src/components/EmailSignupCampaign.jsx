@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { hasSubmittedComponent, setSubmittedComponent } from '../component/tracker';
 import { submitComponentAnalytics } from '../api';
 
 const SUBMISSION_TYPE = 'email-signup-campaign';
@@ -18,13 +19,15 @@ class EmailSignupCampaign extends React.Component {
   }
 
   componentDidMount() {
-    // Should only fire if the component was actually viewed, e.g. not identified.
-    submitComponentAnalytics(
-      SUBMISSION_TYPE,
-      this.props.id,
-      'render',
-      { location: window.location },
-    );
+    if (!hasSubmittedComponent(this.props.id)) {
+      // Only send analytics if the component was actually rendered and not hidden.
+      submitComponentAnalytics(
+        SUBMISSION_TYPE,
+        this.props.id,
+        'render',
+        { location: window.location },
+      );
+    }
   }
 
   handleChange(event) {
@@ -45,7 +48,8 @@ class EmailSignupCampaign extends React.Component {
           isSubmitting: false,
           isComplete: true,
         });
-        // Set identification cookie.
+        // Mark that this component has been submitted.
+        setSubmittedComponent(this.props.id);
       })
       .catch((error) => {
         this.setState({
@@ -57,6 +61,11 @@ class EmailSignupCampaign extends React.Component {
   }
 
   render() {
+    if (hasSubmittedComponent(this.props.id)) {
+      return (
+        <div />
+      );
+    }
     return (
       <div className="id-me_email-signup-campaign">
         {this.state.isComplete ? (
@@ -99,8 +108,6 @@ class EmailSignupCampaign extends React.Component {
             </form>
           </div>
         )}
-
-
       </div>
     );
   }

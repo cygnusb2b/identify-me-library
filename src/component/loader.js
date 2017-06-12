@@ -22,10 +22,7 @@ function createDefinitions(response) {
 }
 
 function load() {
-  return retrieveComponentManifest()
-    .then(createDefinitions)
-    .catch(error => console.error('identify-me load error', error))
-  ;
+  return retrieveComponentManifest().then(createDefinitions);
 }
 
 export default load;

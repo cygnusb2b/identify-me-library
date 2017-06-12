@@ -32,6 +32,7 @@
     "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {
+    "cookies-js": "^1.2.3",
     "promise-polyfill": "6.0.2",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
