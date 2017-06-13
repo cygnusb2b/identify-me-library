@@ -4,6 +4,7 @@ import { hasSubmittedComponent, setSubmittedComponent } from '../component/track
 import { submitComponentAnalytics } from '../api';
 
 const SUBMISSION_TYPE = 'campaign-email-signup';
+const WRAPPER_CLASS = `id-me__${SUBMISSION_TYPE}`;
 
 class EmailSignupCampaign extends React.Component {
   constructor(props) {
@@ -67,20 +68,20 @@ class EmailSignupCampaign extends React.Component {
       );
     }
     return (
-      <div className="id-me_email-signup-campaign">
+      <div className={WRAPPER_CLASS}>
         {this.state.isComplete ? (
           <div>
-            <h3 className="id-me_thank-you-title">{this.props.thankYouTitle}</h3>
-            <div className="id-me_thank-you-body">
+            <h3>{this.props.thankYouTitle}</h3>
+            <div>
               {this.props.thankYouBody}
             </div>
           </div>
         ) : (
           <div>
-            <h3 className="id-me_call-to-action">{this.props.callToAction}</h3>
-            <p className="id-me_description">{this.props.description}</p>
+            <h3>{this.props.callToAction}</h3>
+            <p>{this.props.description}</p>
             {this.props.previewUrl &&
-              <small className="id-me_preview-url">
+              <small>
                 <a href={this.props.previewUrl} target="_blank" rel="noopener noreferrer">
                   View preview
                 </a>
@@ -89,7 +90,6 @@ class EmailSignupCampaign extends React.Component {
             <form onSubmit={this.handleSubmit}>
               <div>
                 <input
-                  className="id-me_email"
                   placeholder="Your email address"
                   type="email"
                   required="true"
@@ -104,7 +104,7 @@ class EmailSignupCampaign extends React.Component {
                 disabled={this.state.isSubmitting}
               />
               {this.state.isSubmitting &&
-                <span className="id-me_form-loading" />
+                <span className="id-me__form-loading" />
               }
             </form>
           </div>

@@ -4,6 +4,7 @@ import { hasSubmittedComponent, setSubmittedComponent, isIdentified } from '../c
 import { submitComponentAnalytics } from '../api';
 
 const SUBMISSION_TYPE = 'campaign-gated-content';
+const WRAPPER_CLASS = `id-me__${SUBMISSION_TYPE}`;
 
 function flipCoin() {
   return Math.random() < 0.5;
@@ -94,20 +95,19 @@ class GatedContent extends React.Component {
 
     if (this.displayRegistrationLink()) {
       return (
-        <div className="id-me_gated-content">
-          <h3 className="id-me_title">{this.props.title}</h3>
+        <div className={WRAPPER_CLASS}>
+          <h3>{this.props.title}</h3>
           <p><a href={this.props.registerUrl}>{this.props.fullRegisterDescription}</a></p>
         </div>
       );
     }
     return (
-      <div className="id-me_gated-content">
-        <h3 className="id-me_title">{this.props.title}</h3>
+      <div className={WRAPPER_CLASS}>
+        <h3>{this.props.title}</h3>
         <p>{this.props.description}</p>
         <form onSubmit={this.handleSubmit}>
           <div>
             <input
-              className="id-me_email"
               placeholder="Your email address"
               type="email"
               required="true"
@@ -122,7 +122,7 @@ class GatedContent extends React.Component {
             disabled={this.state.isSubmitting}
           />
           {this.state.isSubmitting &&
-            <span className="id-me_form-loading" />
+            <span className="id-me__form-loading" />
           }
         </form>
       </div>
