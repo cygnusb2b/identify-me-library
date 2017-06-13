@@ -12,6 +12,7 @@ if (!window.Promise) {
 function doRender(definitions) {
   for (let i = definitions.length - 1; i >= 0; i -= 1) {
     const def = definitions[i];
+    def.props.innerHTML = def.element.innerHTML;
     render(
       createElement(def.component, def.props),
       def.element,

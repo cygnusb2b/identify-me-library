@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { hasSubmittedComponent, setSubmittedComponent } from '../component/tracker';
 import { submitComponentAnalytics } from '../api';
 
-const SUBMISSION_TYPE = 'email-signup-campaign';
+const SUBMISSION_TYPE = 'campaign-email-signup';
 
 class EmailSignupCampaign extends React.Component {
   constructor(props) {
@@ -92,6 +92,7 @@ class EmailSignupCampaign extends React.Component {
                   className="id-me_email"
                   placeholder="Your email address"
                   type="email"
+                  required="true"
                   value={this.state.email}
                   onChange={this.handleChange}
                   disabled={this.state.isSubmitting}

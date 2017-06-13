@@ -4,7 +4,7 @@ const { getIfUtils, removeEmpty } = require('webpack-config-utils');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const srcDir = resolve(__dirname, 'src');
-const serverUrl = 'http://localhost:8000';
+const serverUrl = 'http://identify-me.as3.io';
 
 module.exports = function(env) {
   const { ifProd, ifNotProd } = getIfUtils(env);
@@ -34,17 +34,15 @@ module.exports = function(env) {
     devServer: {
       port: 3080,
       proxy: {
-        '/newsletter': {
-          target: serverUrl,
-          secure: false,
-        },
         '/rest': {
           target: serverUrl,
           secure: false,
+          changeOrigin: true,
         },
         '/component': {
           target: serverUrl,
           secure: false,
+          changeOrigin: true,
         },
       },
     },

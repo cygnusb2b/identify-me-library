@@ -7,7 +7,7 @@ function createDefinitions(response) {
   const definitions = [];
 
   for (let i = components.length - 1; i >= 0; i -= 1) {
-    const component = getComponentFor(components[i].name);
+    const component = getComponentFor(components[i].type);
     if (component) {
       const selectors = components[i].selectors;
       for (let n = selectors.length - 1; n >= 0; n -= 1) {

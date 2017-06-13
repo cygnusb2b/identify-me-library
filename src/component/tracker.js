@@ -25,6 +25,13 @@ function setCookieValue(object) {
   Cookies.set(COOKIE_NAME, JSON.stringify(object), { expires: EXPIRES });
 }
 
+export function isIdentified(cookieName) {
+  if (Cookies.get(cookieName)) {
+    return true;
+  }
+  return false;
+}
+
 export function setSubmittedComponent(id) {
   const value = getCookieValue();
   value.submitted.push(id);
