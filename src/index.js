@@ -5,8 +5,15 @@ import { render } from 'react-dom';
 import extractComponents from './component/extractor';
 import loadComponents from './component/loader';
 
+// Polyfill Promise
 if (!window.Promise) {
   window.Promise = Promise;
+}
+// Polyfill Array.isArray
+if (!Array.isArray) {
+  Array.isArray = function isArray(arg) {
+    return Object.prototype.toString.call(arg) === '[object Array]';
+  };
 }
 
 function doRender(definitions) {

@@ -37,7 +37,10 @@ class GatedContent extends React.Component {
   }
 
   shouldHide() {
-    return hasSubmittedComponent(this.props.id) || isIdentified('token');
+    if (this.props.cookies.length) {
+      return hasSubmittedComponent(this.props.id) || isIdentified(this.props.cookies);
+    }
+    return hasSubmittedComponent(this.props.id);
   }
 
   handleChange(event) {
@@ -137,10 +140,12 @@ GatedContent.defaultProps = {
   buttonValue: 'Continue',
   registerUrl: '',
   innerHTML: '',
+  cookies: [],
 };
 
 GatedContent.propTypes = {
   id: PropTypes.string.isRequired,
+  cookies: PropTypes.arrayOf(PropTypes.number),
   title: PropTypes.string,
   description: PropTypes.string,
   fullRegisterDescription: PropTypes.string,

@@ -1,7 +1,6 @@
 import { retrieveComponentManifest } from '../api';
 import { getComponentFor } from './utils';
 
-
 function createDefinitions(response) {
   const components = response.data || [];
   const definitions = [];
