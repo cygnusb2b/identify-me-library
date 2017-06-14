@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "cookies-js": "^1.2.3",
+    "es6-object-assign": "^1.1.0",
     "promise-polyfill": "6.0.2",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",

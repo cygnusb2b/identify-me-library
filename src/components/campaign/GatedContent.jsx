@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { hasSubmittedComponent, setSubmittedComponent, isIdentified } from '../component/tracker';
-import { submitComponentAnalytics } from '../api';
+import { hasSubmittedComponent, setSubmittedComponent, isIdentified } from '../../component/tracker';
+import { submitComponentAnalytics } from '../../api';
 
 const SUBMISSION_TYPE = 'campaign-gated-content';
 const WRAPPER_CLASS = `id-me__${SUBMISSION_TYPE}`;
@@ -58,7 +58,7 @@ class GatedContent extends React.Component {
       {
         email: this.state.email,
         location: window.location,
-        fullRegister: this.state.fullRegister,
+        fullRegistration: this.displayRegistrationLink(),
       },
     )
       .then(() => {
@@ -145,7 +145,7 @@ GatedContent.defaultProps = {
 
 GatedContent.propTypes = {
   id: PropTypes.string.isRequired,
-  cookies: PropTypes.arrayOf(PropTypes.number),
+  cookies: PropTypes.arrayOf(PropTypes.string),
   title: PropTypes.string,
   description: PropTypes.string,
   fullRegisterDescription: PropTypes.string,

@@ -1,7 +1,7 @@
-import EmailSignupCampaign from './EmailSignupCampaign';
-import GatedContent from './GatedContent';
+import EmailSignup from './campaign/EmailSignup';
+import GatedContent from './campaign/GatedContent';
 
 export default {
-  'campaign-email-signup': EmailSignupCampaign,
+  'campaign-email-signup': EmailSignup,
   'campaign-gated-content': GatedContent,
 };
