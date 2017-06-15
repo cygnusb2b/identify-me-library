@@ -34,9 +34,9 @@ class CampaignForm extends React.Component {
   componentDidMount() {
     const data = {
       formId: this.props.formId,
-      location: window.location,
+      href: window.location.href,
     };
-    this.submitAnalytics('render', data);
+    this.submitAnalytics('view', data);
   }
 
   getFormId() {
@@ -64,7 +64,7 @@ class CampaignForm extends React.Component {
     this.setState({ isSubmitting: true });
     const data = {
       formId: this.props.formId,
-      location: window.location,
+      href: window.location.href,
       values: this.createValuePayload(),
     };
     this.submitAnalytics('submit', data)
