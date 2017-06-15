@@ -10,11 +10,13 @@ class EmailSignup extends React.Component {
         <h3>{this.props.callToAction}</h3>
         <p>{this.props.description}</p>
         {this.props.previewUrl &&
-          <small>
-            <a href={this.props.previewUrl} target="_blank" rel="noopener noreferrer">
-              View preview
-            </a>
-          </small>
+          <p>
+            <small>
+              <a href={this.props.previewUrl} target="_blank" rel="noopener noreferrer">
+                View email preview
+              </a>
+            </small>
+          </p>
         }
       </div>
     );

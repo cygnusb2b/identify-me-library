@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Styles from '../styles';
 import { submitCampaignAnalytics } from '../api';
 import { setSubmittedComponent } from '../component/tracker';
 
@@ -87,8 +88,8 @@ class CampaignForm extends React.Component {
     const htmlFor = this.createFieldId(field.key);
     const className = `${GROUP_PREFIX} ${GROUP_PREFIX}__${field.key}`;
     return (
-      <div key={field.key} className={className}>
-        <label htmlFor={htmlFor}>{field.label}</label>
+      <div style={Styles.formGroup} key={field.key} className={className}>
+        <label style={Styles.label} htmlFor={htmlFor}>{field.label}</label>
         {component}
       </div>
     );
@@ -109,7 +110,7 @@ class CampaignForm extends React.Component {
     const key = field.key;
     const id = this.createFieldId(key);
     // eslint-disable-next-line max-len
-    return <input id={id} className={FIELD_PREFIX} type={type} name={key} value={this.state[key]} required={field.required} onChange={this.handleChange} />;
+    return <input style={Styles.formControl} id={id} className={FIELD_PREFIX} type={type} name={key} value={this.state[key]} required={field.required} onChange={this.handleChange} />;
   }
 
   buildSelectField(field) {
@@ -121,7 +122,7 @@ class CampaignForm extends React.Component {
     });
     return (
       // eslint-disable-next-line max-len
-      <select id={id} className={FIELD_PREFIX} name={key} value={this.state[key]} required={field.required} onChange={this.handleChange}>
+      <select style={Styles.formControl} id={id} className={FIELD_PREFIX} name={key} value={this.state[key]} required={field.required} onChange={this.handleChange}>
         {options}
       </select>
     );
@@ -172,10 +173,12 @@ class CampaignForm extends React.Component {
     }
     return (
       <form id={this.getFormId()} className={className} onSubmit={this.handleSubmit}>
-        <fieldset disabled={this.state.isSubmitting}>
+        <fieldset disabled={this.state.isSubmitting} style={Styles.fieldset}>
           {fields}
         </fieldset>
-        <input type="submit" value={this.props.buttonLabel} disabled={this.state.isSubmitting} />
+        <button type="submit" style={Styles.button} disabled={this.state.isSubmitting}>
+          {this.props.buttonLabel}
+        </button>
         {this.state.isSubmitting &&
           <span className="id-me__form-loading" />
         }
