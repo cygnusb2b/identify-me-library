@@ -36,7 +36,7 @@ class EmailSignup extends React.Component {
   render() {
     const suppress = hasSubmittedComponent(this.props.id);
     // eslint-disable-next-line max-len
-    return <Campaign campaignId={this.props.id} suppress={suppress} buttonLabel={this.props.buttonValue} forms={this.props.forms} whenActive={this.getActiveElements()} whenComplete={this.getCompletedElements()} />;
+    return <Campaign type="email-signup" campaignId={this.props.id} suppress={suppress} buttonLabel={this.props.buttonValue} forms={this.props.forms} whenActive={this.getActiveElements()} whenComplete={this.getCompletedElements()} />;
   }
 }
 

@@ -28,7 +28,7 @@ class Campaign extends React.Component {
   }
 
   render() {
-    const className = 'this-is-the-wrapper';
+    const className = `id-me__campaign id-me__campaign--${this.props.type}`;
     if (this.state.isComplete) {
       return (
         <div className={className}>
@@ -68,6 +68,7 @@ Campaign.defaultProps = {
 
 
 Campaign.propTypes = {
+  type: PropTypes.string.isRequired,
   campaignId: PropTypes.string.isRequired,
   forms: PropTypes.arrayOf(PropTypes.object).isRequired,
   whenComplete: PropTypes.object, // eslint-disable-line react/forbid-prop-types

@@ -37,7 +37,7 @@ class GatedContent extends React.Component {
   render() {
     const suppress = this.shouldSuppress();
     // eslint-disable-next-line max-len
-    return <Campaign campaignId={this.props.id} suppress={suppress} buttonLabel={this.props.buttonValue} forms={this.props.forms} whenActive={this.getActiveElements()} whenComplete={this.displayOriginalContents()} whenSuppressed={this.displayOriginalContents()} />;
+    return <Campaign type="gated-content" campaignId={this.props.id} suppress={suppress} buttonLabel={this.props.buttonValue} forms={this.props.forms} whenActive={this.getActiveElements()} whenComplete={this.displayOriginalContents()} whenSuppressed={this.displayOriginalContents()} />;
   }
 }
 

@@ -41,7 +41,7 @@ class CampaignForm extends React.Component {
   }
 
   getFormId() {
-    return `${FORM_PREFIX}__${this.props.formId}`;
+    return `${FORM_PREFIX}--${this.props.formId}`;
   }
 
   getFieldDefintionBy(key) {
@@ -86,7 +86,7 @@ class CampaignForm extends React.Component {
       return undefined;
     }
     const htmlFor = this.createFieldId(field.key);
-    const className = `${GROUP_PREFIX} ${GROUP_PREFIX}__${field.key}`;
+    const className = `${GROUP_PREFIX} ${GROUP_PREFIX}--${field.key}`;
     return (
       <div style={Styles.formGroup} key={field.key} className={className}>
         <label style={Styles.label} htmlFor={htmlFor}>{field.label}</label>
@@ -129,7 +129,7 @@ class CampaignForm extends React.Component {
   }
 
   createFieldId(key) {
-    return `${this.getFormId()}__${key}`;
+    return `${this.getFormId()}--${key}`;
   }
 
   createValuePayload() {
