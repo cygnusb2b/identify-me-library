@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import VisibilitySensor from 'react-visibility-sensor';
 import Styles from '../styles';
 import { submitCampaignAnalytics } from '../api';
 import { setSubmittedComponent } from '../component/tracker';
@@ -23,6 +24,8 @@ class CampaignForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      hasFocused: false,
+      hasViewed: false,
       isSubmitting: false,
       didError: false,
       errorMessage: '',
@@ -30,6 +33,8 @@ class CampaignForm extends React.Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
+    this.handleView = this.handleView.bind(this);
   }
 
   componentDidMount() {
@@ -37,7 +42,7 @@ class CampaignForm extends React.Component {
       formId: this.props.formId,
       href: window.location.href,
     };
-    this.submitAnalytics('view', data);
+    this.submitAnalytics('render', data);
   }
 
   getFormId() {
@@ -52,6 +57,27 @@ class CampaignForm extends React.Component {
       }
     }
     return undefined;
+  }
+
+  getStandardFormData() {
+    return Object.assign({}, {
+      formId: this.props.formId,
+      href: window.location.href,
+    });
+  }
+
+  handleFocus() {
+    if (!this.state.hasFocused) {
+      this.submitAnalytics('focus', this.getStandardFormData());
+      this.setState({ hasFocused: true });
+    }
+  }
+
+  handleView(isVisible) {
+    if (isVisible && !this.state.hasViewed) {
+      this.submitAnalytics('view', this.getStandardFormData());
+      this.setState({ hasViewed: true });
+    }
   }
 
   handleChange(event) {
@@ -110,7 +136,7 @@ class CampaignForm extends React.Component {
     const key = field.key;
     const id = this.createFieldId(key);
     // eslint-disable-next-line max-len
-    return <input style={Styles.formControl} id={id} className={FIELD_PREFIX} type={type} name={key} value={this.state[key]} required={field.required} onChange={this.handleChange} />;
+    return <input style={Styles.formControl} id={id} className={FIELD_PREFIX} type={type} name={key} value={this.state[key]} required={field.required} onChange={this.handleChange} onFocus={this.handleFocus} />;
   }
 
   buildSelectField(field) {
@@ -122,7 +148,7 @@ class CampaignForm extends React.Component {
     });
     return (
       // eslint-disable-next-line max-len
-      <select style={Styles.formControl} id={id} className={FIELD_PREFIX} name={key} value={this.state[key]} required={field.required} onChange={this.handleChange}>
+      <select style={Styles.formControl} id={id} className={FIELD_PREFIX} name={key} value={this.state[key]} required={field.required} onChange={this.handleChange} onFocus={this.handleFocus}>
         {options}
       </select>
     );
@@ -173,6 +199,7 @@ class CampaignForm extends React.Component {
     }
     return (
       <form id={this.getFormId()} className={className} onSubmit={this.handleSubmit}>
+        <VisibilitySensor onChange={this.handleView} />
         <fieldset disabled={this.state.isSubmitting} style={Styles.fieldset}>
           {fields}
         </fieldset>

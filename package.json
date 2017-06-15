@@ -38,6 +38,7 @@
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-visibility-sensor": "^3.10.0",
     "whatwg-fetch": "^2.0.3"
   }
 }
