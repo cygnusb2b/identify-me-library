@@ -1,154 +1,61 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { hasSubmittedComponent, setSubmittedComponent, isIdentified } from '../../component/tracker';
-import { submitComponentAnalytics } from '../../api';
+import Campaign from '../Campaign';
+import { hasSubmittedComponent, isIdentified } from '../../component/tracker';
 
-const SUBMISSION_TYPE = 'campaign-gated-content';
-const WRAPPER_CLASS = `id-me__${SUBMISSION_TYPE}`;
-
-function flipCoin() {
-  return Math.random() < 0.5;
-}
 
 class GatedContent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isComplete: false,
-      isSubmitting: false,
-      error: null,
-      email: '',
-      fullRegister: flipCoin(),
-    };
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+
+  getActiveElements() {
+    const url = this.props.registerUrl;
+    return (
+      <div>
+        <h3>{this.props.title}</h3>
+        <p>{this.props.description}</p>
+        {url &&
+          <p>
+            Alernatively, you can create a registered account by&nbsp;
+            <a href={url}>clicking here</a>.
+          </p>
+        }
+      </div>
+    );
   }
 
-  componentDidMount() {
-    if (!this.shouldHide()) {
-      // Only send analytics if the component was actually rendered and not hidden.
-      submitComponentAnalytics(
-        SUBMISSION_TYPE,
-        this.props.id,
-        'render',
-        { location: window.location, fullRegistration: this.displayRegistrationLink() },
-      );
-    }
-  }
-
-  shouldHide() {
+  shouldSuppress() {
     if (this.props.cookies.length) {
       return hasSubmittedComponent(this.props.id) || isIdentified(this.props.cookies);
     }
     return hasSubmittedComponent(this.props.id);
   }
 
-  handleChange(event) {
-    this.setState({ email: event.target.value });
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    this.setState({ isSubmitting: true });
-
-    submitComponentAnalytics(
-      SUBMISSION_TYPE,
-      this.props.id,
-      'submit',
-      {
-        email: this.state.email,
-        location: window.location,
-        fullRegistration: this.displayRegistrationLink(),
-      },
-    )
-      .then(() => {
-        this.setState({
-          isSubmitting: false,
-          isComplete: true,
-        });
-        // Mark that this component has been submitted.
-        setSubmittedComponent(this.props.id);
-      })
-      .catch((error) => {
-        this.setState({
-          isSubmitting: false,
-          error: error.message,
-        });
-      })
-    ;
-  }
-
-  displayRegistrationLink() {
-    if (!this.props.registerUrl) {
-      return false;
-    }
-    return this.state.fullRegister;
-  }
-
   displayOriginalContents() {
-    return { __html: this.props.innerHTML };
+    return <div dangerouslySetInnerHTML={{ __html: this.props.innerHTML }} />;
   }
 
   render() {
-    if (this.state.isComplete || this.shouldHide()) {
-      return (
-        <div dangerouslySetInnerHTML={this.displayOriginalContents()} />
-      );
-    }
-
-    if (this.displayRegistrationLink()) {
-      return (
-        <div className={WRAPPER_CLASS}>
-          <h3>{this.props.title}</h3>
-          <p><a href={this.props.registerUrl}>{this.props.fullRegisterDescription}</a></p>
-        </div>
-      );
-    }
-    return (
-      <div className={WRAPPER_CLASS}>
-        <h3>{this.props.title}</h3>
-        <p>{this.props.description}</p>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <input
-              placeholder="Your email address"
-              type="email"
-              required="true"
-              value={this.state.email}
-              onChange={this.handleChange}
-              disabled={this.state.isSubmitting}
-            />
-          </div>
-          <input
-            type="submit"
-            value={this.props.buttonValue}
-            disabled={this.state.isSubmitting}
-          />
-          {this.state.isSubmitting &&
-            <span className="id-me__form-loading" />
-          }
-        </form>
-      </div>
-    );
+    const suppress = this.shouldSuppress();
+    // eslint-disable-next-line max-len
+    return <Campaign campaignId={this.props.id} suppress={suppress} buttonLabel={this.props.buttonValue} forms={this.props.forms} whenActive={this.getActiveElements()} whenComplete={this.displayOriginalContents()} whenSuppressed={this.displayOriginalContents()} />;
   }
 }
 
 GatedContent.defaultProps = {
   title: 'This content is exclusive to subscribers.',
   description: 'To continue reading this content, please complete the following information.',
-  fullRegisterDescription: 'To continue reading this content, please click here to register.',
   buttonValue: 'Continue',
   registerUrl: '',
   innerHTML: '',
   cookies: [],
+  forms: [],
 };
 
 GatedContent.propTypes = {
   id: PropTypes.string.isRequired,
+  forms: PropTypes.arrayOf(PropTypes.object),
   cookies: PropTypes.arrayOf(PropTypes.string),
   title: PropTypes.string,
   description: PropTypes.string,
-  fullRegisterDescription: PropTypes.string,
   innerHTML: PropTypes.string,
   buttonValue: PropTypes.string,
   registerUrl: PropTypes.string,

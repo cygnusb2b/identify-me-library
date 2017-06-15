@@ -26,11 +26,11 @@ function parseJsonResponse(response) {
   return response.json();
 }
 
-export function submitComponentAnalytics(type, identifier, action, data) {
+export function submitCampaignAnalytics(identifier, action, data) {
   return fetch('/component/analytics', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ data: { type, identifier, action, data } }),
+    body: JSON.stringify({ data: { identifier, action, data } }),
   }).then(checkResponseStatus).then(parseJsonResponse);
 }
 
