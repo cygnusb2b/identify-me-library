@@ -30,6 +30,7 @@ class GatedContent extends React.Component {
   }
 
   displayOriginalContents() {
+    // eslint-disable-next-line react/no-danger
     return <div dangerouslySetInnerHTML={{ __html: this.props.innerHTML }} />;
   }
 
