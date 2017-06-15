@@ -5,18 +5,29 @@
         <meta name="keywords" property="keywords" content="analytics, infrastructure, mobile, metrics, charts, graphs, analysis">
     </head>
     <body>
-      <h1>Test page</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam egestas nisi lacus, a semper mi vehicula eget. Aenean gravida pharetra lobortis. Morbi fringilla, ante et consectetur placerat, lacus est imperdiet nunc, egestas pharetra mi felis id mi. Pellentesque egestas vitae augue in pellentesque. Donec semper urna non aliquet pretium. Fusce vitae rhoncus lacus, nec finibus nisl. Morbi suscipit quam eu felis accumsan porttitor. Vivamus diam sem, finibus et viverra quis, elementum id sem. Fusce non pellentesque nibh.</p>
-      <h3>Email Signup Campaigns</h3>
-      <div id="email-campaign-test">
-        This should be replaced by an Email Signup Component, if found in the database.
+      <h1>Sandbox</h1>
+
+
+      <h2>Campaign Types</h2>
+
+      <h3>Email Signup</h3>
+      <div id="test-email-signup">
+        <p class="instructions" data-selector="#test-email-signup"></p>
       </div>
       <hr>
       <h3>Gated Content</h3>
-      <div id="gated-content-test">
+      <div id="test-gated-content">
+        <p class="instructions" data-selector="#test-gated-content"></p>
+        <p>Once the form is completed, this content will re-appear</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam egestas nisi lacus, a semper mi vehicula eget. Aenean gravida pharetra lobortis. Morbi fringilla, ante et consectetur placerat, lacus est imperdiet nunc, egestas pharetra mi felis id mi. Pellentesque egestas vitae augue in pellentesque. Donec semper urna non aliquet pretium. Fusce vitae rhoncus lacus, nec finibus nisl. Morbi suscipit quam eu felis accumsan porttitor. Vivamus diam sem, finibus et viverra quis, elementum id sem. Fusce non pellentesque nibh.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam egestas nisi lacus, a semper mi vehicula eget. Aenean gravida pharetra lobortis. Morbi fringilla, ante et consectetur placerat, lacus est imperdiet nunc, egestas pharetra mi felis id mi. Pellentesque egestas vitae augue in pellentesque. Donec semper urna non aliquet pretium. Fusce vitae rhoncus lacus, nec finibus nisl. Morbi suscipit quam eu felis accumsan porttitor. Vivamus diam sem, finibus et viverra quis, elementum id sem. Fusce non pellentesque nibh.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam egestas nisi lacus, a semper mi vehicula eget. Aenean gravida pharetra lobortis. Morbi fringilla, ante et consectetur placerat, lacus est imperdiet nunc, egestas pharetra mi felis id mi. Pellentesque egestas vitae augue in pellentesque. Donec semper urna non aliquet pretium. Fusce vitae rhoncus lacus, nec finibus nisl. Morbi suscipit quam eu felis accumsan porttitor. Vivamus diam sem, finibus et viverra quis, elementum id sem. Fusce non pellentesque nibh.</p>
       </div>
+      <script>
+        var elements = document.getElementsByClassName('instructions');
+        for (var i = 0; i < elements.length; i++) {
+          elements[i].innerHTML = 'To populate this component, create the corresponding campaign and target it to <pre>host: ' + document.location.hostname + ', selector: ' + elements[i].dataset.selector + '</pre>'
+        }
+      </script>
     </body>
 </html>
