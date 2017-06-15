@@ -18,8 +18,8 @@ node {
 
   stage("Copy Artifacts") {
     if (!env.BRANCH_NAME.contains('PR-')) {
-      step([$class: 'ArtifactArchiver', artifacts: 'id-me.js'])
-      step([$class: 'ArtifactArchiver', artifacts: 'id-me.js.map'])
+      step([$class: 'ArtifactArchiver', artifacts: 'dist/id-me.js'])
+      step([$class: 'ArtifactArchiver', artifacts: 'dist/id-me.js.map'])
     }
   }
 }
