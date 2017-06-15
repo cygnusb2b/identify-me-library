@@ -25,7 +25,7 @@ module.exports = function(env) {
       ],
     },
     output: {
-      filename: ifProd('[name].[chunkhash].js', '[name].js'),
+      filename: '[name].js',
       path: resolve(__dirname, 'dist'),
       publicPath: '/',
       library: 'IdMe',
