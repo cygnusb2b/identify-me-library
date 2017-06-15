@@ -1,7 +1,5 @@
-FROM scomm/node-build:latest
+FROM nginx:stable
 
-WORKDIR /app
-COPY . /app
+COPY . /usr/share/nginx/html
 
-RUN yarn install
-RUN npm run build
+# custom config or somethign
