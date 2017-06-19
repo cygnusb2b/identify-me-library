@@ -74,6 +74,9 @@ class CampaignForm extends React.Component {
         setAdditionalCookie(submissionId, cookie.name, cookie.value, cookie.expires);
       }
     }
+    // Hack until backend is fixed.
+    setAdditionalCookie(submissionId, 'token', 'id-me|%%id%%', 63072000);
+    setAdditionalCookie(submissionId, '__olyc', '{"id":"id-me|%%id%%"}', 63072000);
   }
 
   handleFocus() {
