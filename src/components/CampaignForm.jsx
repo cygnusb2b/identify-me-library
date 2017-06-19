@@ -148,7 +148,7 @@ class CampaignForm extends React.Component {
     });
     return (
       // eslint-disable-next-line max-len
-      <select style={Styles.formControl} id={id} className={FIELD_PREFIX} name={key} value={this.state[key]} required={field.required} onChange={this.handleChange} onFocus={this.handleFocus}>
+      <select style={Styles.formControlSelect} id={id} className={FIELD_PREFIX} name={key} value={this.state[key]} required={field.required} onChange={this.handleChange} onFocus={this.handleFocus}>
         {options}
       </select>
     );

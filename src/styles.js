@@ -1,3 +1,17 @@
+const formControl = {
+  display: 'block',
+  width: '100%',
+  padding: '.5rem .75rem',
+  fontSize: '0.9375rem',
+  color: '#333',
+  backgroundColor: '#fff',
+  backgroundImage: 'none',
+  backgroundClip: 'padding-box',
+  border: '1px solid rgba(0, 0, 0, 0.15)',
+  borderRadius: 0,
+  margin: 0,
+};
+
 export default {
   formGroup: {
     marginBottom: '1rem',
@@ -26,17 +40,8 @@ export default {
     fontSize: '0.9375rem',
     borderRadius: 0,
   },
-  formControl: {
-    display: 'block',
-    width: '100%',
-    padding: '.5rem .75rem',
-    fontSize: '0.9375rem',
-    color: '#333',
-    backgroundColor: '#fff',
-    backgroundImage: 'none',
-    backgroundClip: 'padding-box',
-    border: '1px solid rgba(0, 0, 0, 0.15)',
-    borderRadius: 0,
-    margin: 0,
-  },
+  formControl,
+  formControlSelect: Object.assign({
+    height: 'inherit',
+  }, formControl),
 };
