@@ -47,3 +47,8 @@ export function hasSubmittedComponent(id) {
   }
   return false;
 }
+
+export function setAdditionalCookie(submissionId, name, value, expires) {
+  const injected = value.replace('%%id%%', submissionId);
+  Cookies.set(name, injected, { expires });
+}

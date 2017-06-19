@@ -20,7 +20,7 @@ class Campaign extends React.Component {
       return undefined;
     }
     // eslint-disable-next-line max-len
-    return <CampaignForm campaignId={this.props.campaignId} formId={form.identifier} fields={form.fields} onComplete={this.finish} buttonLabel={this.props.buttonLabel} />;
+    return <CampaignForm campaignId={this.props.campaignId} formId={form.identifier} fields={form.fields} onComplete={this.finish} buttonLabel={this.props.buttonLabel} setCookies={this.props.setCookies} />;
   }
 
   finish() {
@@ -64,6 +64,7 @@ Campaign.defaultProps = {
   whenActive: <span />,
   whenSuppressed: <span />,
   buttonLabel: 'Submit',
+  setCookies: [],
 };
 
 
@@ -76,6 +77,11 @@ Campaign.propTypes = {
   whenSuppressed: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   suppress: PropTypes.bool,
   buttonLabel: PropTypes.string,
+  setCookies: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    value: PropTypes.string,
+    expires: PropTypes.number,
+  })),
 };
 
 export default Campaign;

@@ -37,7 +37,7 @@ class GatedContent extends React.Component {
   render() {
     const suppress = this.shouldSuppress();
     // eslint-disable-next-line max-len
-    return <Campaign type="gated-content" campaignId={this.props.id} suppress={suppress} buttonLabel={this.props.buttonValue} forms={this.props.forms} whenActive={this.getActiveElements()} whenComplete={this.displayOriginalContents()} whenSuppressed={this.displayOriginalContents()} />;
+    return <Campaign type="gated-content" campaignId={this.props.id} suppress={suppress} buttonLabel={this.props.buttonValue} forms={this.props.forms} whenActive={this.getActiveElements()} whenComplete={this.displayOriginalContents()} whenSuppressed={this.displayOriginalContents()} setCookies={this.props.setCookies} />;
   }
 }
 
@@ -48,6 +48,7 @@ GatedContent.defaultProps = {
   registerUrl: '',
   innerHTML: '',
   cookies: [],
+  setCookies: [],
   forms: [],
 };
 
@@ -60,6 +61,11 @@ GatedContent.propTypes = {
   innerHTML: PropTypes.string,
   buttonValue: PropTypes.string,
   registerUrl: PropTypes.string,
+  setCookies: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    value: PropTypes.string,
+    expires: PropTypes.number,
+  })),
 };
 
 export default GatedContent;

@@ -36,7 +36,7 @@ class EmailSignup extends React.Component {
   render() {
     const suppress = hasSubmittedComponent(this.props.id);
     // eslint-disable-next-line max-len
-    return <Campaign type="email-signup" campaignId={this.props.id} suppress={suppress} buttonLabel={this.props.buttonValue} forms={this.props.forms} whenActive={this.getActiveElements()} whenComplete={this.getCompletedElements()} />;
+    return <Campaign type="email-signup" campaignId={this.props.id} suppress={suppress} buttonLabel={this.props.buttonValue} forms={this.props.forms} whenActive={this.getActiveElements()} whenComplete={this.getCompletedElements()} setCookies={this.props.setCookies} />;
   }
 }
 
@@ -48,6 +48,7 @@ EmailSignup.defaultProps = {
   thankYouTitle: 'Thank You!',
   thankYouBody: 'Your submission has been received.',
   forms: [],
+  setCookies: [],
 };
 
 EmailSignup.propTypes = {
@@ -59,6 +60,11 @@ EmailSignup.propTypes = {
   previewUrl: PropTypes.string,
   thankYouTitle: PropTypes.string,
   thankYouBody: PropTypes.string,
+  setCookies: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    value: PropTypes.string,
+    expires: PropTypes.number,
+  })),
 };
 
 export default EmailSignup;

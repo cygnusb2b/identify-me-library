@@ -4,7 +4,7 @@ import VisibilitySensor from 'react-visibility-sensor';
 import Styles from '../styles';
 import assign from '../assign';
 import { submitCampaignAnalytics } from '../api';
-import { setSubmittedComponent } from '../component/tracker';
+import { setSubmittedComponent, setAdditionalCookie } from '../component/tracker';
 
 const FORM_PREFIX = 'id-me__form';
 const GROUP_PREFIX = 'id-me__field-group';
@@ -67,6 +67,15 @@ class CampaignForm extends React.Component {
     });
   }
 
+  setAdditionalCookies(submissionId) {
+    if (Array.isArray(this.props.setCookies)) {
+      for (let i = this.props.setCookies.length - 1; i >= 0; i -= 1) {
+        const cookie = this.props.setCookies[i];
+        setAdditionalCookie(submissionId, cookie.name, cookie.value, cookie.expires);
+      }
+    }
+  }
+
   handleFocus() {
     if (!this.state.hasFocused) {
       this.submitAnalytics('focus', this.getStandardFormData());
@@ -96,8 +105,11 @@ class CampaignForm extends React.Component {
       values: this.createValuePayload(),
     };
     this.submitAnalytics('submit', data)
-      .then(() => {
+      .then((response) => {
         setSubmittedComponent(this.props.campaignId);
+        if (response && response.data && response.data.inserted) {
+          this.setAdditionalCookies(response.data.inserted);
+        }
         this.setState({ isSubmitting: false });
         this.props.onComplete();
       })
@@ -220,6 +232,7 @@ CampaignForm.defaultProps = {
   buttonLabel: 'Submit',
   fields: [],
   onComplete: () => {},
+  setCookies: [],
 };
 
 CampaignForm.propTypes = {
@@ -237,6 +250,11 @@ CampaignForm.propTypes = {
       value: PropTypes.string,
       label: PropTypes.string,
     })),
+  })),
+  setCookies: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    value: PropTypes.string,
+    expires: PropTypes.number,
   })),
 };
 
