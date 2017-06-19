@@ -1,3 +1,5 @@
+import assign from './assign';
+
 const formControl = {
   display: 'block',
   width: '100%',
@@ -41,7 +43,7 @@ export default {
     borderRadius: 0,
   },
   formControl,
-  formControlSelect: Object.assign({
+  formControlSelect: assign({
     height: 'inherit',
   }, formControl),
 };

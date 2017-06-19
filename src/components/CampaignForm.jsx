@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import VisibilitySensor from 'react-visibility-sensor';
 import Styles from '../styles';
+import assign from '../assign';
 import { submitCampaignAnalytics } from '../api';
 import { setSubmittedComponent } from '../component/tracker';
 
@@ -60,7 +61,7 @@ class CampaignForm extends React.Component {
   }
 
   getStandardFormData() {
-    return Object.assign({}, {
+    return assign({}, {
       formId: this.props.formId,
       href: window.location.href,
     });
@@ -81,7 +82,7 @@ class CampaignForm extends React.Component {
   }
 
   handleChange(event) {
-    const values = Object.assign({}, this.state.values);
+    const values = assign({}, this.state.values);
     values[event.target.name] = event.target.value;
     this.setState({ values });
   }

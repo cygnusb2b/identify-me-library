@@ -1,13 +1,9 @@
 import 'whatwg-fetch';
 import Promise from 'promise-polyfill';
-import ObjectAssign from 'es6-object-assign';
 import { createElement } from 'react';
 import { render } from 'react-dom';
 import extractComponents from './component/extractor';
 import loadComponents from './component/loader';
-
-// Object assign polyfill
-ObjectAssign.polyfill();
 
 // Polyfill Promise
 if (!window.Promise) {
