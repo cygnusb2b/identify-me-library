@@ -27,7 +27,7 @@ function parseJsonResponse(response) {
 }
 
 export function submitCampaignAnalytics(identifier, action, data) {
-  return fetch('http://id-me.as3.io/component/analytics', {
+  return fetch('https://id-me.as3.io/component/analytics', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ data: { identifier, action, data } }),
@@ -35,7 +35,7 @@ export function submitCampaignAnalytics(identifier, action, data) {
 }
 
 export function retrieveComponentManifest() {
-  return fetch('http://id-me.as3.io/component/manifest', {
+  return fetch('https://id-me.as3.io/component/manifest', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ data: {
@@ -45,7 +45,7 @@ export function retrieveComponentManifest() {
 }
 
 export function submitComponentForm(data) {
-  return fetch('http://id-me.as3.io/component/submit', {
+  return fetch('https://id-me.as3.io/component/submit', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ data }),
